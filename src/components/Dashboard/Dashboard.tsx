@@ -33,11 +33,8 @@ const Dashboard: React.FC = () => {
         flexWrap: 'wrap',
         gap: 2
       }}>
-        <Typography variant="h4" sx={{ 
-          fontWeight: 'bold', 
-          color: '#2c3e50',
-          fontSize: { xs: '1.8rem', md: '2.2rem' }
-        }}>
+
+        <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#2c3e50' }}>
           Panel de Control
         </Typography>
         
@@ -202,11 +199,11 @@ const Dashboard: React.FC = () => {
         boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)'
       }}>
         <Typography variant="h5" sx={{ fontWeight: '600', mb: 3 }}>
-          Últimas Transacciones
+          Últimas Operaciones
         </Typography>
         {transactions.length === 0 ? (
           <Typography sx={{ textAlign: 'center', py: 4, color: '#7f8c8d' }}>
-            No hay transacciones registradas
+            No existen Operaciones registradas
           </Typography>
         ) : (
           <Box sx={{

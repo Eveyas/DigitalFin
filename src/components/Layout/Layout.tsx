@@ -1,6 +1,8 @@
 import React from 'react';
-import { Box, AppBar, Toolbar, Typography, Button, IconButton, Menu, MenuItem, Avatar } from '@mui/material';
-import { Menu as MenuIcon, Logout as LogoutIcon } from '@mui/icons-material';
+import { Box, AppBar, Toolbar, Typography, Button, IconButton, Avatar } from '@mui/material';
+import { Menu as MenuIcon, Logout as LogoutIcon, Dashboard as DashboardIcon, AccountBalanceWallet as BudgetsIcon, Receipt as TransactionsIcon,
+  Assessment as ReportsIcon, People as UsersIcon
+} from '@mui/icons-material';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import DigitalLogo from '../../assets/DigitalLogo.png';
@@ -28,14 +30,39 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
   const getMenuOptions = () => {
     const baseOptions = [
-      { path: '/', label: 'Dashboard', roles: ['admin', 'contabilidad', 'ventas', 'gerente', 'consulta'] }
+      { 
+        path: '/', 
+        label: 'Dashboard', 
+        icon: <DashboardIcon sx={{ mr: 1 }} />,
+        roles: ['admin', 'contabilidad', 'ventas', 'gerente', 'consulta'] 
+      }
     ];
 
     const roleSpecificOptions = [
-      { path: '/budgets', label: 'Presupuestos', roles: ['admin', 'contabilidad'] },
-      { path: '/transactions', label: 'Transacciones', roles: ['admin', 'contabilidad'] },
-      { path: '/reports', label: 'Reportes', roles: ['admin', 'gerente'] },
-      { path: '/users', label: 'Usuarios', roles: ['admin'] }
+      { 
+        path: '/budgets', 
+        label: 'Presupuestos', 
+        icon: <BudgetsIcon sx={{ mr: 1 }} />,
+        roles: ['admin', 'contabilidad'] 
+      },
+      { 
+        path: '/transactions', 
+        label: 'Transacciones', 
+        icon: <TransactionsIcon sx={{ mr: 1 }} />,
+        roles: ['admin', 'contabilidad'] 
+      },
+      { 
+        path: '/reports', 
+        label: 'Reportes', 
+        icon: <ReportsIcon sx={{ mr: 1 }} />,
+        roles: ['admin', 'gerente'] 
+      },
+      { 
+        path: '/users', 
+        label: 'Usuarios', 
+        icon: <UsersIcon sx={{ mr: 1 }} />,
+        roles: ['admin'] 
+      }
     ];
 
     return [...baseOptions, ...roleSpecificOptions].filter(option => 
@@ -68,12 +95,15 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             <Button
               key={item.path}
               fullWidth
+              startIcon={item.icon}
               sx={{
                 justifyContent: 'flex-start',
                 px: 3,
                 py: 1.5,
                 color: 'white',
                 textAlign: 'left',
+                textTransform: 'none',
+                fontSize: '0.9rem',
                 '&:hover': {
                   bgcolor: 'rgba(255,255,255,0.1)'
                 }
@@ -132,7 +162,6 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           </Toolbar>
         </AppBar>
 
-        {/* Contenido */}
         <Box sx={{ p: 3 }}>
           {children}
         </Box>

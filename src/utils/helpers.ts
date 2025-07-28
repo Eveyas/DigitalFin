@@ -5,7 +5,7 @@ import autoTable from 'jspdf-autotable';
   // Generar reporte en PDF
 export const generatePDFReport = (transactions: any[]) => {
   if (transactions.length === 0) {
-    alert('No hay transacciones para generar el reporte');
+    alert('No hay operaciones para generar el reporte');
     return;
   }
   
@@ -59,7 +59,7 @@ export const generatePDFReport = (transactions: any[]) => {
   // Generar reporte en Excel
 export const generateExcelReport = (transactions: any[]) => {
   if (transactions.length === 0) {
-    alert('No hay transacciones para generar el reporte');
+    alert('No hay operaciones para generar el reporte');
     return;
   }
   

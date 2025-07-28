@@ -9,9 +9,9 @@ const Transactions: React.FC = () => {
 
   return (
     <Box>
-      <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold', color: '#2c3e50', mb: 3 }}>
-        Transacciones
-      </Typography>
+        <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#2c3e50' }}>
+          Registro de Operaciones
+        </Typography>
       
       <Box sx={{ 
         display: 'flex', 
@@ -26,7 +26,7 @@ const Transactions: React.FC = () => {
           boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)'
         }}>
           <Typography variant="h6" gutterBottom sx={{ fontWeight: '600', mb: 2 }}>
-            Registrar Transacción
+            Registrar movimiento
           </Typography>
           <TransactionForm />
         </Paper>

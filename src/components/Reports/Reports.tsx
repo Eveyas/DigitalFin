@@ -13,8 +13,9 @@ const Reports: React.FC = () => {
 
   return (
     <Box>
-      <Typography variant="h4" gutterBottom>Reportes</Typography>
-      
+        <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#2c3e50' }}>
+           Reportes
+        </Typography>      
       <Paper sx={{ p: 3, mb: 3 }}>
         <Typography variant="h6" gutterBottom>Generar Reporte</Typography>
         

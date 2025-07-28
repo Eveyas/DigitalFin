@@ -34,9 +34,10 @@ const Budgets: React.FC = () => {
         alignItems: 'center',
         mb: 4
       }}>
-        <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#2c3e50' }}>
-          Gestión de Presupuestos
-        </Typography>
+
+         <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#2c3e50' }}>
+           Gestión de Presupuestos
+          </Typography>
         
         {!showForm && !editingBudget && (
           <Button 
@@ -46,9 +47,9 @@ const Budgets: React.FC = () => {
               setEditingBudget(null);
               setShowForm(true);
             }}
-            sx={{ py: 1.5, px: 3 }}
+            sx={{ py: 1.4, px: 3 }}
           >
-            Nuevo Presupuesto
+            Nuevo
           </Button>
         )}
       </Box>

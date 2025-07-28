@@ -90,7 +90,7 @@ const UserManagement: React.FC = () => {
             })}
             sx={{ py: 1.5, px: 3 }}
           >
-            Nuevo Usuario
+            Nuevo
           </Button>
         )}
       </Box>

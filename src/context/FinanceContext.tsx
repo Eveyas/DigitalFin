@@ -86,7 +86,7 @@ export const FinanceProvider: React.FC<{ children: ReactNode }> = ({ children })
     setBudgets(budgets.filter(budget => budget.id !== id));
   };
 
-  // Funciones para transacciones
+  // Funciones para Operaciones
   const addTransaction = (transaction: Transaction) => {
     setTransactions([...transactions, transaction]);
     
