@@ -75,7 +75,7 @@ const BudgetForm: React.FC<BudgetFormProps> = ({
       
       <TextField
         select
-        label="Área/Proyecto"
+        label="Categoría"
         value={area}
         onChange={(e) => setArea(e.target.value)}
         required

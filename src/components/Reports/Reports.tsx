@@ -12,10 +12,17 @@ const Reports: React.FC = () => {
   });
 
   return (
-    <Box>
+     <Box sx={{ p: 3 }}>
+          <Box sx={{ 
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            alignItems: 'center',
+            mb: 4
+          }}> 
         <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#2c3e50' }}>
            Reportes
-        </Typography>      
+        </Typography> 
+      </Box>
       <Paper sx={{ p: 3, mb: 3 }}>
         <Typography variant="h6" gutterBottom>Generar Reporte</Typography>
         

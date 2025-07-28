@@ -37,7 +37,7 @@ const Navbar: React.FC = () => {
           to="/transactions"
           sx={{ fontWeight: isActive('/transactions') ? 'bold' : 'normal' }}
         >
-          Transacciones
+          Operaciones
         </Button>
         <Button 
           color="inherit" 

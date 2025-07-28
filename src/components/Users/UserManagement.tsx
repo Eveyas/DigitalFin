@@ -77,7 +77,7 @@ const UserManagement: React.FC = () => {
           Gestión de Usuarios
         </Typography>
         
-        {currentUser?.role === 'admin' && (
+        {/* {currentUser?.role === 'admin' && (
           <Button 
             variant="contained" 
             startIcon={<Add />}
@@ -92,7 +92,7 @@ const UserManagement: React.FC = () => {
           >
             Nuevo
           </Button>
-        )}
+        )} */}
       </Box>
       
       {editingUser && (

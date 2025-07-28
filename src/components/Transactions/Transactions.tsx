@@ -1,17 +1,55 @@
-import React from 'react';
-import { Box, Paper, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import { 
+  Box, 
+  Paper, 
+  Typography,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle
+} from '@mui/material';
 import TransactionForm from './TransactionForm';
 import CategoryManager from './CategoryManager';
 import { useFinance } from '../../context/FinanceContext';
+import WarningIcon from '@mui/icons-material/Warning';
+import Button from '@mui/material/Button';
 
 const Transactions: React.FC = () => {
-  const { transactions } = useFinance();
+  const { transactions, categories, removeCategory } = useFinance();
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [categoryToDelete, setCategoryToDelete] = useState<string | null>(null);
+
+  const handleDeleteClick = (category: string) => {
+    setCategoryToDelete(category);
+    setDeleteDialogOpen(true);
+  };
+
+  const confirmDelete = () => {
+    if (categoryToDelete) {
+      removeCategory(categoryToDelete);
+    }
+    setDeleteDialogOpen(false);
+    setCategoryToDelete(null);
+  };
+
+  const cancelDelete = () => {
+    setDeleteDialogOpen(false);
+    setCategoryToDelete(null);
+  };
 
   return (
-    <Box>
+    <Box sx={{ p: 3 }}>
+      <Box sx={{ 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: 'center',
+        mb: 4
+      }}> 
         <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#2c3e50' }}>
-          Registro de Operaciones
+          Movimientos Financieros
         </Typography>
+      </Box>
       
       <Box sx={{ 
         display: 'flex', 
@@ -40,7 +78,7 @@ const Transactions: React.FC = () => {
           <Typography variant="h6" gutterBottom sx={{ fontWeight: '600', mb: 2 }}>
             Gestionar Categorías
           </Typography>
-          <CategoryManager />
+          <CategoryManager onDeleteClick={handleDeleteClick} />
         </Paper>
       </Box>
       
@@ -117,6 +155,37 @@ const Transactions: React.FC = () => {
           </Box>
         )}
       </Box>
+
+      {/* Diálogo de confirmación para eliminar categoría */}
+      <Dialog
+        open={deleteDialogOpen}
+        onClose={cancelDelete}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title" sx={{ display: 'flex', alignItems: 'center' }}>
+          <WarningIcon color="error" sx={{ mr: 1, fontSize: '2rem' }} />
+          {"Confirmar eliminación"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            ¿Estás seguro de que deseas eliminar la categoría <strong>"{categoryToDelete}"</strong>?
+            <br /><br />
+            <Typography variant="body2" color="error">
+              Advertencia: Todas las transacciones asociadas a esta categoría quedarán sin categoría.
+              {categories.includes('Sin categoría') ? "" : " Se creará la categoría 'Sin categoría'."}
+            </Typography>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={cancelDelete} variant="outlined">
+            Cancelar
+          </Button>
+          <Button onClick={confirmDelete} variant="contained" color="error" autoFocus>
+            Eliminar
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };

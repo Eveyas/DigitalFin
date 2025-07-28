@@ -13,7 +13,6 @@ const Budgets: React.FC = () => {
   
   const areas = Array.from(new Set([
     ...budgets.map(b => b.area),
-    ...['Marketing', 'Desarrollo', 'Ventas', 'Administración', 'Operaciones']
   ]));
 
   const handleSubmit = (budget: Budget) => {

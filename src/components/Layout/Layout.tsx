@@ -1,7 +1,13 @@
 import React from 'react';
 import { Box, AppBar, Toolbar, Typography, Button, IconButton, Avatar } from '@mui/material';
-import { Menu as MenuIcon, Logout as LogoutIcon, Dashboard as DashboardIcon, AccountBalanceWallet as BudgetsIcon, Receipt as TransactionsIcon,
-  Assessment as ReportsIcon, People as UsersIcon
+import { 
+  Menu as MenuIcon, 
+  Logout as LogoutIcon,
+  Dashboard as DashboardIcon,
+  AccountBalanceWallet as BudgetsIcon,
+  Receipt as TransactionsIcon,
+  Assessment as ReportsIcon,
+  People as UsersIcon
 } from '@mui/icons-material';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -47,7 +53,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       },
       { 
         path: '/transactions', 
-        label: 'Transacciones', 
+        label: 'Movimientos',
         icon: <TransactionsIcon sx={{ mr: 1 }} />,
         roles: ['admin', 'contabilidad'] 
       },
@@ -162,6 +168,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           </Toolbar>
         </AppBar>
 
+        {/* Contenido */}
         <Box sx={{ p: 3 }}>
           {children}
         </Box>

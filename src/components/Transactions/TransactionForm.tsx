@@ -94,7 +94,7 @@ const TransactionForm: React.FC = () => {
       />
       
       <Button type="submit" variant="contained" color="primary">
-        Registrar Transacción
+        Registrar
       </Button>
     </Box>
   );
