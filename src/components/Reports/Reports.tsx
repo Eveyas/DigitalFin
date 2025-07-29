@@ -35,7 +35,7 @@ const Reports: React.FC = () => {
             onChange={(e) => setReportType(e.target.value as any)}
           >
             <MenuItem value="all">Todos</MenuItem>
-            <MenuItem value="income">Solo Ingresos</MenuItem>
+            {/* <MenuItem value="income">Solo Ingresos</MenuItem> */}
             <MenuItem value="expense">Solo Egresos</MenuItem>
           </Select>
         </FormControl>

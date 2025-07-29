@@ -35,8 +35,8 @@ const TransactionForm: React.FC = () => {
   return (
     <Box component="form" onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
       <RadioGroup row value={type} onChange={(e) => setType(e.target.value as 'income' | 'expense')}>
-        <FormControlLabel value="income" control={<Radio />} label="Ingreso" />
-        <FormControlLabel value="expense" control={<Radio />} label="Egreso" />
+        {/* <FormControlLabel value="income" control={<Radio />} label="Ingreso" /> */}
+        {/* <FormControlLabel value="expense" control={<Radio />} label="Egreso" /> */}
       </RadioGroup>
       
       <TextField
