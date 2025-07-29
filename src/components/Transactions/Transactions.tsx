@@ -84,7 +84,7 @@ const Transactions: React.FC = () => {
       
       <Box mt={4}>
         <Typography variant="h6" gutterBottom sx={{ fontWeight: '600', mb: 2 }}>
-          Últimas Transacciones
+          Últimos Movimientos
         </Typography>
         {transactions.length === 0 ? (
           <Typography sx={{ 
@@ -92,7 +92,7 @@ const Transactions: React.FC = () => {
             py: 4,
             color: '#7f8c8d'
           }}>
-            No hay transacciones registradas
+            No hay movimientos registrados
           </Typography>
         ) : (
           <Box sx={{
@@ -172,8 +172,8 @@ const Transactions: React.FC = () => {
             ¿Estás seguro de que deseas eliminar la categoría <strong>"{categoryToDelete}"</strong>?
             <br /><br />
             <Typography variant="body2" color="error">
-              Advertencia: Todas las transacciones asociadas a esta categoría quedarán sin categoría.
-              {categories.includes('Sin categoría') ? "" : " Se creará la categoría 'Sin categoría'."}
+              Advertencia: Se eliminarán todos los movimientos asociados a esta categoría
+              {/* {categories.includes('Sin categoría') ? "" : " Se creará la categoría 'Sin categoría'"} */}
             </Typography>
           </DialogContentText>
         </DialogContent>

@@ -7,14 +7,10 @@ import { useFinance } from '../../context/FinanceContext';
 import { Budget } from '../../context/FinanceContext';
 
 const Budgets: React.FC = () => {
-  const { budgets, addBudget, updateBudget } = useFinance();
+  const { budgets, addBudget, updateBudget, categories, addCategory } = useFinance();
   const [showForm, setShowForm] = useState(false);
   const [editingBudget, setEditingBudget] = useState<Budget | null>(null);
   
-  const areas = Array.from(new Set([
-    ...budgets.map(b => b.area),
-  ]));
-
   const handleSubmit = (budget: Budget) => {
     if (editingBudget) {
       updateBudget(editingBudget.id, budget);
@@ -65,7 +61,8 @@ const Budgets: React.FC = () => {
               setShowForm(false);
               setEditingBudget(null);
             }}
-            areas={areas}
+            categories={categories}
+            addCategory={addCategory}
           />
         </Paper>
       ) : null}

@@ -1,32 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Budget } from '../../context/FinanceContext';
-import { Box, TextField, Button, MenuItem } from '@mui/material';
+import { 
+  Box, 
+  TextField, 
+  Button,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem
+} from '@mui/material';
 
 interface BudgetFormProps {
   initialData?: Budget;
   onSubmit: (budget: Budget) => void;
   onCancel?: () => void;
-  areas: string[];
+  categories: string[];
+  addCategory: (category: string) => void;
 }
 
 const BudgetForm: React.FC<BudgetFormProps> = ({ 
   initialData, 
   onSubmit, 
   onCancel,
-  areas 
+  categories,
+  addCategory
 }) => {
   const [name, setName] = useState(initialData?.name || '');
   const [amount, setAmount] = useState(initialData?.amount.toString() || '');
-  const [area, setArea] = useState(initialData?.area || areas[0] || '');
+  const [category, setCategory] = useState(initialData?.area || '');
+  const [customCategory, setCustomCategory] = useState('');
   const [endDate, setEndDate] = useState(initialData?.endDate || new Date().toISOString().split('T')[0]);
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  // Actualizar categoría si las categorías disponibles cambian
+  useEffect(() => {
+    if (category && !categories.includes(category)) {
+      setCategory(categories[0] || '');
+    }
+  }, [categories, category]);
 
   const validate = () => {
     const newErrors: Record<string, string> = {};
     
     if (!name.trim()) newErrors.name = 'Nombre requerido';
     if (!amount || parseFloat(amount) <= 0) newErrors.amount = 'Monto inválido';
-    if (!area.trim()) newErrors.area = 'Área requerida';
+    if (!category.trim()) newErrors.category = 'Categoría requerida';
+    if (category === 'custom' && !customCategory.trim()) newErrors.customCategory = 'Nueva categoría requerida';
     if (!endDate) newErrors.endDate = 'Fecha requerida';
     if (endDate && new Date(endDate) < new Date()) newErrors.endDate = 'Fecha debe ser futura';
     
@@ -38,12 +57,22 @@ const BudgetForm: React.FC<BudgetFormProps> = ({
     e.preventDefault();
     if (!validate()) return;
     
+    // Si se está creando una nueva categoría
+    if (category === 'custom') {
+      const newCategory = customCategory.trim();
+      if (!categories.includes(newCategory)) {
+        addCategory(newCategory);
+      }
+    }
+    
+    const finalCategory = category === 'custom' ? customCategory : category;
+    
     onSubmit({
       id: initialData?.id || Date.now().toString(),
       name,
       amount: parseFloat(amount),
       spent: initialData?.spent || 0,
-      area,
+      area: finalCategory,
       endDate,
       createdAt: initialData?.createdAt || new Date().toISOString()
     });
@@ -73,22 +102,32 @@ const BudgetForm: React.FC<BudgetFormProps> = ({
         helperText={errors.amount}
       />
       
-      <TextField
-        select
-        label="Categoría"
-        value={area}
-        onChange={(e) => setArea(e.target.value)}
-        required
-        fullWidth
-        error={!!errors.area}
-        helperText={errors.area}
-      >
-        {areas.map(areaOption => (
-          <MenuItem key={areaOption} value={areaOption}>
-            {areaOption}
-          </MenuItem>
-        ))}
-      </TextField>
+      <FormControl fullWidth required error={!!errors.category}>
+        <InputLabel id="category-label">Categoría</InputLabel>
+        <Select
+          labelId="category-label"
+          value={category}
+          label="Categoría"
+          onChange={(e) => setCategory(e.target.value as string)}
+        >
+          {categories.map(cat => (
+            <MenuItem key={cat} value={cat}>{cat}</MenuItem>
+          ))}
+          {/* <MenuItem value="custom">Otra categoría...</MenuItem> */}
+        </Select>
+      </FormControl>
+      
+      {category === 'custom' && (
+        <TextField
+          label="Nombre de nueva categoría"
+          value={customCategory}
+          onChange={(e) => setCustomCategory(e.target.value)}
+          required
+          fullWidth
+          error={!!errors.customCategory}
+          helperText={errors.customCategory}
+        />
+      )}
       
       <TextField
         label="Fecha de Vencimiento"
